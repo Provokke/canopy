@@ -1,0 +1,10 @@
+[package]
+name = "canopy-app"
+description = "App builder, plugins and a headless particle demo on canopy-ecs"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+canopy-ecs = { path = "../canopy-ecs" }
