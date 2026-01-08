@@ -1,0 +1,13 @@
+[package]
+name = "canopy-demo"
+description = "Boids demo binary for canopy: CLI, per-frame stats and a determinism hash"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+canopy-ecs = { path = "../canopy-ecs" }
+canopy-app = { path = "../canopy-app" }
+anyhow.workspace = true
+rayon.workspace = true
