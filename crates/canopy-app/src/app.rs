@@ -132,4 +132,3 @@ impl App {
         self.post_update.run(&mut self.world)
     }
 }
-
