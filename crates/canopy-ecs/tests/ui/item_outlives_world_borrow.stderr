@@ -1,0 +1,9 @@
+error[E0499]: cannot borrow `w` as mutable more than once at a time
+ --> tests/ui/item_outlives_world_borrow.rs:8:5
+  |
+7 |     let mut item = w.query::<&mut A, ()>().unwrap().next().unwrap();
+  |                    - first mutable borrow occurs here
+8 |     w.despawn(e);
+  |     ^ second mutable borrow occurs here
+9 |     item.0 = 2;
+  |     ---- first borrow later used here
