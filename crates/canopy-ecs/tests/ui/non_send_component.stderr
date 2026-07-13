@@ -1,0 +1,35 @@
+error[E0277]: `Rc<u32>` cannot be shared between threads safely
+ --> tests/ui/non_send_component.rs:3:32
+  |
+3 | impl canopy_ecs::Component for NotSend {}
+  |                                ^^^^^^^ `Rc<u32>` cannot be shared between threads safely
+  |
+  = help: within `NotSend`, the trait `Sync` is not implemented for `Rc<u32>`
+note: required because it appears within the type `NotSend`
+ --> tests/ui/non_send_component.rs:2:8
+  |
+2 | struct NotSend(std::rc::Rc<u32>);
+  |        ^^^^^^^
+note: required by a bound in `canopy_ecs::Component`
+ --> src/world.rs
+  |
+  | pub trait Component: Send + Sync + 'static {
+  |                             ^^^^ required by this bound in `Component`
+
+error[E0277]: `Rc<u32>` cannot be sent between threads safely
+ --> tests/ui/non_send_component.rs:3:32
+  |
+3 | impl canopy_ecs::Component for NotSend {}
+  |                                ^^^^^^^ `Rc<u32>` cannot be sent between threads safely
+  |
+  = help: within `NotSend`, the trait `Send` is not implemented for `Rc<u32>`
+note: required because it appears within the type `NotSend`
+ --> tests/ui/non_send_component.rs:2:8
+  |
+2 | struct NotSend(std::rc::Rc<u32>);
+  |        ^^^^^^^
+note: required by a bound in `canopy_ecs::Component`
+ --> src/world.rs
+  |
+  | pub trait Component: Send + Sync + 'static {
+  |                      ^^^^ required by this bound in `Component`
