@@ -1,0 +1,20 @@
+[package]
+name = "benches-compare"
+description = "Criterion comparison of canopy-ecs against hecs (benches only)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+canopy-ecs = { path = "../crates/canopy-ecs" }
+rayon.workspace = true
+
+[dev-dependencies]
+hecs = "0.10"
+criterion.workspace = true
+
+[[bench]]
+name = "compare"
+harness = false
