@@ -1,0 +1,23 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cargo fmt --all --check
+      - run: cargo clippy --workspace --all-targets -- -D warnings
+      - run: cargo test --workspace --locked
+      - run: RUSTDOCFLAGS=-Dwarnings cargo doc --no-deps
+  miri:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup toolchain install nightly --component miri
+      - run: MIRIFLAGS=-Zmiri-disable-isolation cargo +nightly miri test -p canopy-ecs
+  fuzz-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup toolchain install nightly && cargo install cargo-fuzz
+      - run: cd fuzz && cargo +nightly fuzz run world_ops -- -max_total_time=30
