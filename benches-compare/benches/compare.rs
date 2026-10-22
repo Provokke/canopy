@@ -230,4 +230,3 @@ criterion_group!(
     par_scaling
 );
 criterion_main!(benches);
-
